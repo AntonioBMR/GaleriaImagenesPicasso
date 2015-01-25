@@ -13,11 +13,10 @@ import android.widget.GridView;
 import java.util.ArrayList;
 
 /**
- * Producto realizado por AntonioBMR on 24/01/2015.
+ * Producto realizado por AntonioBMR corp.
  */
 
 public class MainActivity extends Activity {
-
     private GridView gv;
     private ArrayList<String> rutas;
     private Adaptador ad;
@@ -50,7 +49,6 @@ public class MainActivity extends Activity {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 String ruta=rutas.get(i);
                 Intent in = new Intent(MainActivity.this, Imagen.class);
                 in.putExtra("ruta", ruta);

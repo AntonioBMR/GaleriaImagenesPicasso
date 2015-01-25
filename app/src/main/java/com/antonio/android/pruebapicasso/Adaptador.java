@@ -13,20 +13,20 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Producto realizado por AntonioBMR on 24/01/2015.
+ * Producto realizado por AntonioBMR corp.
  */
 public class Adaptador extends ArrayAdapter<String> {
-    private Context contexto;
-    private ArrayList<String> lista;
-    private int recurso;
-    private static LayoutInflater i;
+    private Context context;
+     private int recurso;
+    private ArrayList<String> rutas;
+    private static LayoutInflater li;
 
     public Adaptador(Context context, int resource, ArrayList<String> objects) {
         super(context, resource, objects);
-        this.contexto = context;
-        this.lista = objects;
+        this.context = context;
+        this.rutas = objects;
         this.recurso = resource;
-        this.i = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public static class ViewHolder {
@@ -37,7 +37,7 @@ public class Adaptador extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
         if (convertView == null) {
-            convertView = i.inflate(recurso, null);
+            convertView = li.inflate(recurso, null);
             vh = new ViewHolder();
             vh.iv = (ImageView) convertView.findViewById(R.id.iv);
             convertView.setTag(vh);
@@ -45,9 +45,9 @@ public class Adaptador extends ArrayAdapter<String> {
             vh = (ViewHolder) convertView.getTag();
         }
         String ruta;
-        ruta = lista.get(position);
+        ruta = rutas.get(position);
         File f=new File(ruta);
-        Picasso.with(contexto).load(f).into(vh.iv);
+        Picasso.with(context).load(f).into(vh.iv);
         return convertView;
     }
 }

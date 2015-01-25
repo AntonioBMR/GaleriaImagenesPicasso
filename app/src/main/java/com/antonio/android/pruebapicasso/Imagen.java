@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 
 /**
- * Producto realizado por AntonioBMR on 24/01/2015.
+ * Producto realizado por AntonioBMR corp.
  */
 public class Imagen extends Activity {
 
