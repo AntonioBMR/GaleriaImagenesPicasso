@@ -22,13 +22,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        iniciarComponentes();
-    }
-
-    public void iniciarComponentes(){
-
         Uri ur= MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] proyeccion = {MediaStore.Images.Thumbnails._ID, MediaStore.Images.Media.DATA};
+        String[] proyeccion =null;
         String condicion = null;
         String[] parametros = null;
         String orden = null;
@@ -41,7 +36,6 @@ public class MainActivity extends Activity {
         ad=new Adaptador(this,cursor);
         gv = (GridView)findViewById(R.id.gridView);
         gv.setAdapter(ad);
-
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -52,7 +46,6 @@ public class MainActivity extends Activity {
                 startActivity(in);
             }
         });
-        registerForContextMenu(gv);
 
     }
 }
