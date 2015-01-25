@@ -9,6 +9,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+
+import java.util.ArrayList;
+
 /**
  * Producto realizado por AntonioBMR on 24/01/2015.
  */
@@ -16,31 +19,39 @@ import android.widget.GridView;
 public class MainActivity extends Activity {
 
     private GridView gv;
-    Adaptador ad;
+    private ArrayList<String> rutas;
+    private Adaptador ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Uri ur= MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        Uri uri= MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        rutas=new ArrayList<String>();
         String[] proyeccion =null;
         String condicion = null;
         String[] parametros = null;
         String orden = null;
         Cursor cursor=getContentResolver().query(
-                ur,
+                uri,
                 proyeccion,
                 condicion,
                 parametros,
                 orden);
-        ad=new Adaptador(this,cursor);
-        gv = (GridView)findViewById(R.id.gridView);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String nombre = cursor.getString(1);
+            rutas.add(nombre);
+            cursor.moveToNext();
+        }
+        gv=(GridView)findViewById(R.id.gridView);
+        ad = new Adaptador(this,R.layout.detalle,rutas);
         gv.setAdapter(ad);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Cursor cursor = (Cursor)gv.getItemAtPosition(i);
-                int ruta=cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+
+                String ruta=rutas.get(i);
                 Intent in = new Intent(MainActivity.this, Imagen.class);
                 in.putExtra("ruta", ruta);
                 startActivity(in);
