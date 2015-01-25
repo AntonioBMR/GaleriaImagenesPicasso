@@ -28,11 +28,9 @@ public class Adaptador extends ArrayAdapter<String> {
         this.recurso = resource;
         this.li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
     public static class ViewHolder {
         public ImageView iv;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
